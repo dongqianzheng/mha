@@ -40,12 +40,12 @@ masterha_conf_host takes below arguments.
 
 * --hostname=(hostname)
 
-A target hostname of the block that will be added. When setting --command=add, this parameter is mandatory.
+  A target hostname of the block that will be added. When setting --command=add, this parameter is mandatory.
 
 * --block=(block_name)
 
-A block name of the config file. When adding a block, the block name must not be identical to existing blocks in the config file. When deleting a block, the block name must exist in the config file. If --block is not set, the block name will be "server_$hostname"._
+  A block name of the config file. When adding a block, the block name must not be identical to existing blocks in the config file. When deleting a block, the block name must exist in the config file. If --block is not set, the block name will be "server_$hostname"._
 
 * --params=(key1=value1;key2=value2;...)
 
-Parameter lists, separated by semi-colon.
+  Parameter lists, separated by semi-colon.
