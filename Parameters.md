@@ -45,7 +45,7 @@
 
   * Local Scope: Per-server scope parameters. Local scope parameters should be set under `[server_xxx]` blocks within [application configuration](Configuration#writing-an-application-configuration-file) file.
   * App Scope: Parameters for each {master, slaves} pair. These parameters should be set under a  `[server_default]` block within [application configuration](Configuration#writing-an-application-configuration-file) file.
-  * Global Scope: Parameters for all {master, slaves} pairs. Global scope parameters are useful only when you manage multiple {master, slaves} pairs from single manager server. These parameters should be set in a [global configuration](Configuration#writing-an-application-configuration-file) file.
+  * Global Scope: Parameters for all {master, slaves} pairs. Global scope parameters are useful only when you manage multiple {master, slaves} pairs from single manager server. These parameters should be set in a [global configuration](Configuration#writing-a-global-configuration-file) file.
 
 
 ### hostname
