@@ -13,7 +13,7 @@
 |[candidate_master](#candidate_master)|No             |Local Only           |0                  |candidate_master=1|
 |[no_master](#no_master)|No             |Local Only           |0                  |no_master=1 |
 |[ignore_fail](#ignore_fail)|No             |Local Only           |0                  |ignore_fail=1|
-|[skip_ini_ssh_check](#skip_init_ssh_check)|No             |Local Only           |0                  |skip_init_ssh_check=1|
+|[skip_init_ssh_check](#skip_init_ssh_check)|No             |Local Only           |0                  |skip_init_ssh_check=1|
 |[skip_reset_slave](#skip_reset_slave)|No             |Local/App/Global     |0                  |skip_reset_slave=1|
 |[user](#user)    |No             |Local/App/Global     |root               |user=mysql_root|
 |[password](#password)|No             |Local/App/Global     |""(empty string)   |password=rootpass|
