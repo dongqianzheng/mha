@@ -9,7 +9,7 @@ Here is a brief example for configuring Pacemaker (Heartbeat v1 mode).
     # /etc/ha.d/haresources on host2
     host2  failover_start  IPaddr::192.168.0.3
 
-> # failover\_start script example
+> failover\_start script example
   
     start)
     masterha_master_switch --master_state=dead --interactive=0 --wait_on_failover_error=0 --dead_master_host=host1 --new_master_host=host2
@@ -19,7 +19,7 @@ Here is a brief example for configuring Pacemaker (Heartbeat v1 mode).
     # do nothing
 
 
-> # Application configuration file:
+> Application configuration file:
 
     [server1]
     hostname=host1
