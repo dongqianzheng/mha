@@ -64,74 +64,70 @@ The below command has the same effect as the above.
       $ masterha_master_switch --master_state=dead --conf=/etc/app1.cnf --dead_master_host=host1 --        new_master_host=host5
 
 * --wait_until_gtid_in_sync(0|1)
+
 > This option is available since 0.56. 
 
 When doing GTID based failover, MHA waits until slaves to catch up the new master's GTID if setting wait_until_gtid_in_sync=1. If setting 0, MHA doesn't wait slaves to catch up. Default is 1.
 
 * --skip_change_master
+
 > This option is available since 0.56. 
 
 If this option is set, MHA skips executing CHANGE MASTER.
 
 * --skip_disable_read_only
+
 > This option is available since 0.56. 
 
 If this option is set, MHA skips executing SET GLOBAL read_only=0 on the new master.
 
 * --ignore_binlog_server_error
+
 > This option is available since 0.56.
 
 If this option is set, MHA ignores any error from binlog servers during failover.
 
+## Non-Interactive Failover
+If you set "--interactive=0" in masterha_master_switch, it executes failover automatically (non-interactive).
 
+    $ masterha_master_switch --master_state=dead --conf=/etc/conf/masterha/app1.cnf --dead_master_host=host1 --new_master_host=host2 --interactive=0
 
+This is actually the same what masterha_manager runs internally. This non-interactive failover is useful if you have already verified that the master is dead, but you want to do failover as quickly as possible.
+Non-interactive failover is also useful if you use other existing master monitoring software and want to invoke non-interactive failover command from the software. Typical example is invoking masterha_master_switch from clustering software like Pacemaker.
 
-## Non-Interactive Failover ##
-> If you set "--interactive=0" in masterha\_master\_switch, it executes failover automatically (non-interactive).
+## Scheduled(Online) Master Switch
+Sometimes you might want to do scheduled master switch, even though the current master is running. Typical example is replacing a partially broken hardware or upgrading the master server. You can not replace a RAID controller or increase memory without stopping the server. In such cases, you need to allocate a scheduled maintenance time, and you have to migrate the master to a different server.
 
-```
-  $ masterha_master_switch --master_state=dead --conf=/etc/conf/masterha/app1.cnf --dead_master_host=host1 --new_master_host=host2 --interactive=0
-```
+masterha_master_switch command can be used to run scheduled master switch.
 
-> This is actually the same what masterha\_manager runs internally. This non-interactive failover is useful if you have already verified that the master is dead, but you want to do failover as quickly as possible.
-> Non-interactive failover is also useful if you use other existing master monitoring software and want to invoke non-interactive failover command from the software. Typical example is invoking masterha\_master\_switch from clustering software like Pacemaker.
+    $ masterha_master_switch --master_state=alive --conf=/etc/app1.cnf --new_master_host=host2
 
+--master\_state=alive must be set.
+Program flows for the scheduled master switch is slightly different from the master failover. For example, you do not need to power off the master server, but you need to make sure that write queries are not executed on the master.
+By setting [master_ip_online_change_script](Parameters#master_ip_online_change_script), you can control how to disallow write traffics on the current master (i.e. dropping writable users, setting read_only=1, etc) before executing FLUSH TABLES WITH READ LOCK, and how to allow write traffics on the new master.
 
-## Scheduled(Online) Master Switch ##
-> Sometimes you might want to do scheduled master switch, even though the current master is running. Typical example is replacing a partially broken hardware or upgrading the master server. You can not replace a RAID controller or increase memory without stopping the server. In such cases, you need to allocate a scheduled maintenance time, and you have to migrate the master to a different server.
+Online master switch starts only when all of the following conditions are met.
 
-> masterha\_master\_switch command can be used to run scheduled master switch.
+* IO threads on all slaves are running
+* SQL threads on all slaves are running
+* Seconds_Behind_Master on all slaves are less or equal than --running_updates_limit seconds
+* On master, none of update queries take more than --running_updates_limit seconds in the show processlist output
 
-```
-  $ masterha_master_switch --master_state=alive --conf=/etc/app1.cnf --new_master_host=host2
-```
+The reasons of these restrictions are for safety reasons, and to switch to the new master as quickly as possible.
+masterha_master_switch takes below arguments when switching master online.
 
-> --master\_state=alive must be set.
-> Program flows for the scheduled master switch is slightly different from the master failover. For example, you do not need to power off the master server, but you need to make sure that write queries are not executed on the master.
-> By setting [master\_ip\_online\_change\_script](Parameters#master_ip_online_change_script.md), you can control how to disallow write traffics on the current master (i.e. dropping writable users, setting read\_only=1, etc) before executing FLUSH TABLES WITH READ LOCK, and how to allow write traffics on the new master.
+* --new_master_host=(hostname)
+New master's hostname.
 
-> Online master switch starts only when all of the following conditions are met.
+* --orig_master_is_new_slave
+After master switch completes, the previous master will run as a slave of the new master. By default, it's disabled (the previous master will not join new replication environments).
+If you use this option, you need to set [repl_password](Parameters#repl_password) parameter in the config file because current master does not know the replication password for the new master.
 
-  * IO threads on all slaves are running
-  * SQL threads on all slaves are running
-  * Seconds\_Behind\_Master on all slaves are less or equal than --running\_updates\_limit seconds
-  * On master, none of update queries take more than --running\_updates\_limit seconds in the show processlist output
+* --running_updates_limit=(seconds)
+If the current master executes write queries that take more than this parameter, or any of the MySQL slaves behind master more than this parameter, master switch aborts. By default, it's 1 (1 second).
 
-> The reasons of these restrictions are for safety reasons, and to switch to the new master as quickly as possible.
-> masterha\_master\_switch takes below arguments when switching master online.
+* --remove_orig_master_conf
+When this option is set, if master switch succeeds correctly, MHA Manager automatically removes the section of the dead master from the configuration file. By default, the configuration file is not modified at all.
 
-  * --new\_master\_host=(hostname)
-> New master's hostname.
-
-  * --orig\_master\_is\_new\_slave
-> After master switch completes, the previous master will run as a slave of the new master. By default, it's disabled (the previous master will not join new replication environments).
-> If you use this option, you need to set [repl\_password](Parameters#repl_password.md) parameter in the config file because current master does not know the replication password for the new master.
-
-  * --running\_updates\_limit=(seconds)
-> If the current master executes write queries that take more than this parameter, or any of the MySQL slaves behind master more than this parameter, master switch aborts. By default, it's 1 (1 second).
-
-  * --remove\_orig\_master\_conf
-> When this option is set, if master switch succeeds correctly, MHA Manager automatically removes the section of the dead master from the configuration file. By default, the configuration file is not modified at all.
-
-  * --skip\_lock\_all\_tables
-> When doing master switch, MHA runs FLUSH TABLES WITH READ LOCK on a orig master to make sure updates are really stopped. But FLUSH TABLES WITH READ LOCK is very expensive and if you can make sure that no updates are coming to the orig master (by killing all clients at master\_ip\_online\_change\_script etc), you may want to avoid to lock tables by using this argument.
+* --skip_lock_all_tables
+When doing master switch, MHA runs FLUSH TABLES WITH READ LOCK on a orig master to make sure updates are really stopped. But FLUSH TABLES WITH READ LOCK is very expensive and if you can make sure that no updates are coming to the orig master (by killing all clients at master_ip_online_change_script etc), you may want to avoid to lock tables by using this argument.
