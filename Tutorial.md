@@ -142,9 +142,9 @@ Now we have covered basic tests for master failover. In practice, you may want t
   See [report_script parameter](Parameters#report_script) and a sample script (MHA Manager dir)/samples/scripts/send_report in MHA Manager package.
 
   * Failover error and manual failover tests
+
   You may want to test failure scenario. See the below example.
 
-    
     terminal1# masterha_manager --conf=/etc/app1.cnf
     terminal2# mysql -hhost2 db1 -e "insert into t1 values (100, 100, 100)"
     terminal2# mysql -hhost1 db1 -e "insert into t1 values (100, 100, 100)"
