@@ -15,14 +15,14 @@
   * [[GTID based failover|GTID_Based_Failover]]
 
 ### Command reference
-  * [[masterha\_manager|masterha_manager]] (master monitoring and running failover automatically in case of master down)
-  * [[masterha\_master\_switch|masterha_master_switch]] (manual or non-interactive master failover or online master switch)
-  * [[masterha\_check\_status|masterha_check_status]]
-  * [[masterha\_check\_repl|masterha_check_repl]]
-  * [[masterha\_stop|masterha_stop]]
-  * [[masterha\_conf\_host|masterha_conf_host]]
-  * [[masterha\_ssh\_check|Requirements#SSH_public_key_authentication]] (checking SSH configurations)
-  * [[purge\_relay\_logs|Requirements#purge_relay_logs_script]] (deleting old relay logs without causing replication delay)
+  * [[masterha_manager|masterha_manager]] (master monitoring and running failover automatically in case of master down)
+  * [[masterha_master_switch|masterha_master_switch]] (manual or non-interactive master failover or online master switch)
+  * [[masterha_check_status|masterha_check_status]]
+  * [[masterha_check_repl|masterha_check_repl]]
+  * [[masterha_stop|masterha_stop]]
+  * [[masterha_conf_host|masterha_conf_host]]
+  * [[masterha_ssh_check|Requirements#SSH_public_key_authentication]] (checking SSH configurations)
+  * [[purge_relay_logs|Requirements#purge_relay_logs_script]] (deleting old relay logs without causing replication delay)
 
 ### Advanced
   * [[Sequences of MHA|Sequences_of_MHA]]
