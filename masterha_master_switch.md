@@ -76,25 +76,25 @@ While [masterha_manager](masterha_manager) command monitors master and does fail
 
 * --wait_until_gtid_in_sync(0|1)
 
-> This option is available since 0.56. 
+  > This option is available since 0.56. 
 
   When doing GTID based failover, MHA waits until slaves to catch up the new master's GTID if setting wait_until_gtid_in_sync=1. If setting 0, MHA doesn't wait slaves to catch up. Default is 1.
 
 * --skip_change_master
 
-> This option is available since 0.56. 
+  > This option is available since 0.56. 
 
   If this option is set, MHA skips executing CHANGE MASTER.
 
 * --skip_disable_read_only
 
-> This option is available since 0.56. 
+  > This option is available since 0.56. 
 
   If this option is set, MHA skips executing SET GLOBAL read_only=0 on the new master.
 
 * --ignore_binlog_server_error
 
-> This option is available since 0.56.
+  > This option is available since 0.56.
 
   If this option is set, MHA ignores any error from binlog servers during failover.
 
