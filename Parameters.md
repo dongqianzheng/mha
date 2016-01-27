@@ -54,7 +54,7 @@ Hostname or IP address of the target MySQL server. This parameter is mandatory, 
 
 ### ip
 
-IP address of the target MySQL server. Default is gethostbyname($hostname). MHA Manager and MHA Node internally uses this IP address to connect via MySQL and SSH. Normally you don't need to configure this parameter because it's automatically resolved from hostname parameter.
+IP address of the target MySQL server. Default is `gethostbyname($hostname)`. MHA Manager and MHA Node internally uses this IP address to connect via MySQL and SSH. Normally you don't need to configure this parameter because it's automatically resolved from hostname parameter.
 
 ### port
 
