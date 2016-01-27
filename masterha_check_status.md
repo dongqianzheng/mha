@@ -12,7 +12,7 @@ When MHA Manager is successfully monitoring the MySQL master, status code (exit 
 All status codes and descriptions are listed below.
 
 
-|**Status Code(Exit code)**|**Status String**|**Description**|
+|**Status Code (Exit code)**|**Status String**|**Description**|
 |:-------------------------|:----------------|:--------------|
 |0                         |PING_OK         |Master is running and MHA Manager is monitoring. Master state is alive.|
 |1                         |---              |Unexpected error happened. For example, config file does not exist. If this error happens, check arguments are valid or not.|
