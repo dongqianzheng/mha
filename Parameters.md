@@ -5,42 +5,42 @@
 |[hostname](#hostname)|Yes            |Local Only           |-                  |hostname=mysql_server1, hostname=192.168.0.1, etc|
 |[ip](#ip)        |No             |Local Only           |gethostbyname($hostname)|ip=192.168.1.3|
 |[port](#port)    |No             |Local/App/Global     |3306               |port=3306    |
-|[ssh_host](#ssh-host)|No             |Local Only           |same as hostname   |ssh_host=mysql_server1, ssh_host=192.168.0.1, etc|
-|[ssh_ip](#ssh-ip)|No             |Local Only           |gethostbyname($ssh_host)|ssh_ip=192.168.1.3|
-|[ssh_port](#ssh-port)|No             |Local/App/Global     |22                 |ssh_port=22 |
-|[ssh_connection_timeout](#ssh-connection-timeout)|No             |Local/App/Global     |5                  |ssh_connection_timeout=20|
-|[ssh_options](#ssh-options)|No             |Local/App/Global     |""(empty string)   |ssh_options="-i /root/.ssh/id_dsa2"|
-|[candidate_master](#candidate-master)|No             |Local Only           |0                  |candidate_master=1|
-|[no_master](#no-master)|No             |Local Only           |0                  |no_master=1 |
-|[ignore_fail](#ignore-fail)|No             |Local Only           |0                  |ignore_fail=1|
-|[skip_ini_ssh_check](#skip-init-ssh-check)|No             |Local Only           |0                  |skip_init_ssh_check=1|
-|[skip_reset_slave](#skip-reset-slave)|No             |Local/App/Global     |0                  |skip_reset_slave=1|
+|[ssh_host](#ssh_host)|No             |Local Only           |same as hostname   |ssh_host=mysql_server1, ssh_host=192.168.0.1, etc|
+|[ssh_ip](#ssh_ip)|No             |Local Only           |gethostbyname($ssh_host)|ssh_ip=192.168.1.3|
+|[ssh_port](#ssh_port)|No             |Local/App/Global     |22                 |ssh_port=22 |
+|[ssh_connection_timeout](#ssh_connection_timeout)|No             |Local/App/Global     |5                  |ssh_connection_timeout=20|
+|[ssh_options](#ssh_options)|No             |Local/App/Global     |""(empty string)   |ssh_options="-i /root/.ssh/id_dsa2"|
+|[candidate_master](#candidate_master)|No             |Local Only           |0                  |candidate_master=1|
+|[no_master](#no_master)|No             |Local Only           |0                  |no_master=1 |
+|[ignore_fail](#ignore_fail)|No             |Local Only           |0                  |ignore_fail=1|
+|[skip_ini_ssh_check](#skip_init_ssh_check)|No             |Local Only           |0                  |skip_init_ssh_check=1|
+|[skip_reset_slave](#skip_reset_slave)|No             |Local/App/Global     |0                  |skip_reset_slave=1|
 |[user](#user)    |No             |Local/App/Global     |root               |user=mysql_root|
 |[password](#password)|No             |Local/App/Global     |""(empty string)   |password=rootpass|
-|[repl_user](#repl-user)|No             |Local/App/Global     |Master_User value from SHOW SLAVE STATUS|repl_user=repl|
-|[repl_password](#repl-password)|No             |Local/App/Global     |- (current replication password)|repl_user=replpass|
-|[disable_log_bin](#disable-log-bin)|No             |Local/App/Global     |0                  |disable_log_bin=1|
-|[master_pid_file](#master-pid-file)|No             |Local/App/Global     |""(empty string)   |master_pid_file=/var/lib/mysql/master1.pid|
-|[ssh_user](#ssh-user)|No             |Local/App/Global     |current OS user    |ssh_user=root|
-|[remote_workdir](#remote-workdir)|No             |Local/App/Global     |/var/tmp           |remote_workdir=/var/log/masterha/app1|
-|[master_binlog_dir](#master-binlog-dir)|No             |Local/App/Global     |/var/lib/mysql     |master_binlog_dir=/data/mysql1,/data/mysql2|
-|[log_level](#log-level)|No             |App/Global           |info               |log_level=debug|
-|[manager_workdir](#manager-workdir)|No             |App                  |/var/tmp           |manager_workdir=/var/log/masterha|
-|[client_bindir](#client-bindir)|No             |App                  |-                  |client_bindir=/usr/mysql/bin|
-|[client_libdir](#client-libdir)|No             |App                  |-                  |client_libdir=/usr/lib/mysql|
-|[manager_log](#manager-log)|No             |App                  |STDERR             |manager_log=/var/log/masterha/app1.log|
-|[check_repl_delay](#check-repl-delay)|No             |App/Global           |1                  |check_repl_delay=0|
-|[check_repl_filter](#check-repl-filter)|No             |App/Global           |1                  |check_repl_filter=0|
-|[latest_priority](#latest-priority)|No             |App/Global           |1                  |latest_priority=0|
-|[multi_tier_slave](#multi-tier-slave)|No             |App/Global           |0                  |multi_tier_slave=1|
-|[ping_interval](#ping-interval)|No             |App/Global           |3                  |ping_interval=5|
+|[repl_user](#repl_user)|No             |Local/App/Global     |Master_User value from SHOW SLAVE STATUS|repl_user=repl|
+|[repl_password](#repl_password)|No             |Local/App/Global     |- (current replication password)|repl_user=replpass|
+|[disable_log_bin](#disable_log_bin)|No             |Local/App/Global     |0                  |disable_log_bin=1|
+|[master_pid_file](#master_pid_file)|No             |Local/App/Global     |""(empty string)   |master_pid_file=/var/lib/mysql/master1.pid|
+|[ssh_user](#ssh_user)|No             |Local/App/Global     |current OS user    |ssh_user=root|
+|[remote_workdir](#remote_workdir)|No             |Local/App/Global     |/var/tmp           |remote_workdir=/var/log/masterha/app1|
+|[master_binlog_dir](#master_binlog_dir)|No             |Local/App/Global     |/var/lib/mysql     |master_binlog_dir=/data/mysql1,/data/mysql2|
+|[log_level](#log_level)|No             |App/Global           |info               |log_level=debug|
+|[manager_workdir](#manager_workdir)|No             |App                  |/var/tmp           |manager_workdir=/var/log/masterha|
+|[client_bindir](#client_bindir)|No             |App                  |-                  |client_bindir=/usr/mysql/bin|
+|[client_libdir](#client_libdir)|No             |App                  |-                  |client_libdir=/usr/lib/mysql|
+|[manager_log](#manager_log)|No             |App                  |STDERR             |manager_log=/var/log/masterha/app1.log|
+|[check_repl_delay](#check_repl_delay)|No             |App/Global           |1                  |check_repl_delay=0|
+|[check_repl_filter](#check_repl_filter)|No             |App/Global           |1                  |check_repl_filter=0|
+|[latest_priority](#latest_priority)|No             |App/Global           |1                  |latest_priority=0|
+|[multi_tier_slave](#multi_tier_slave)|No             |App/Global           |0                  |multi_tier_slave=1|
+|[ping_interval](#ping_interval)|No             |App/Global           |3                  |ping_interval=5|
 |[ping_type](#ping-type)|No             |App/Global           |SELECT             |ping_type=CONNECT|
-|[secondary_check_script](#secondary-check-script)|No             |App/Global           |null               |secondary_check_script= masterha_secondary_check -s remote_dc1 -s remote_dc2|
-|[master_ip_failover_script](#master-ip-failover-script)|No             |App/Global           |null               |master_ip_failover_script=/usr/local/custom_script/master_ip_failover|
-|[master_ip_online_change_script](#master-ip-online-change-script)|No             |App/Global           |null               |master_ip_online_change_script= /usr/local/custom_script/master_ip_online_change|
-|[shutdown_script](#shutdown-script)|No             |App/Global           |null               |shutdown_script= /usr/local/custom_script/master_shutdown|
-|[report_script](#report-script)|No             |App/Global           |null               |report_script= /usr/local/custom_script/report|
-|[init_conf_load_script](#init-conf-load-script)|No             |App/Global           |null               |init_conf_load_script = /usr/local/custom_script/init_conf_loader|
+|[secondary_check_script](#secondary_check_script)|No             |App/Global           |null               |secondary_check_script= masterha_secondary_check -s remote_dc1 -s remote_dc2|
+|[master_ip_failover_script](#master_ip_failover_script)|No             |App/Global           |null               |master_ip_failover_script=/usr/local/custom_script/master_ip_failover|
+|[master_ip_online_change_script](#master_ip_online_change_script)|No             |App/Global           |null               |master_ip_online_change_script= /usr/local/custom_script/master_ip_online_change|
+|[shutdown_script](#shutdown_script)|No             |App/Global           |null               |shutdown_script= /usr/local/custom_script/master_shutdown|
+|[report_script](#report_script)|No             |App/Global           |null               |report_script= /usr/local/custom_script/report|
+|[init_conf_load_script](#init_conf_load_script)|No             |App/Global           |null               |init_conf_load_script = /usr/local/custom_script/init_conf_loader|
 
 
   * Local Scope: Per-server scope parameters. Local scope parameters should be set under `[server_xxx]` blocks within [application configuration](Configuration#writing-an-application-configuration-file) file.
