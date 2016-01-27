@@ -1,0 +1,1 @@
+* Providing more sample scripts for [master_ip_failover_script](Parameters#master_ip_failover_script) and [master_ip_online_change_script](Parameters#master_ip_online_change_script)
