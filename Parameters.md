@@ -61,29 +61,24 @@ IP address of the target MySQL server. Default is `gethostbyname($hostname)`. MH
 Port number of the target MySQL server. Default is 3306. MHA connects to MySQL servers by using IP address and port.
 
 ### ssh_host
-
-(Supported from 0.53)
+> (Supported from 0.53)
 Hostname or IP address of the target MySQL server that is used via SSH. This parameter (and ssh_port parameter) is useful when you are in a multi VLAN configuration: For security reason, the SSH is not permit on the data's VLAN.
 Default is same as hostname.
 
 ### ssh_ip
-
-(Supported from 0.53)
-IP address of the target MySQL server that is used via SSH. Default is gethostbyname($ssh_host).
+> (Supported from 0.53)
+IP address of the target MySQL server that is used via SSH. Default is `gethostbyname($ssh_host)`.
 
 ### ssh_port
-
-(Supported from 0.53)
+>(Supported from 0.53)
 Port number of the target MySQL server used via SSH. Default is 22.
 
 ### ssh_connection_timeout
-
-(Supported from 0.54)
+> (Supported from 0.54)
 Default is 5 seconds. Before adding this parameter timeout was hard coded.
 
 ### ssh_options
-
-(Supported from 0.53)
+> (Supported from 0.53)
 Additional SSH command line options.
 
 ### candidate_master
@@ -93,7 +88,6 @@ You might use different kinds of machines between slaves, and want to promote th
 By setting candidate_master to 1, the server is prioritized to the new master, as long as it meets conditions to be the new master (i.e. binary log is enabled, it does not delay replication significantly, etc). So candidate\_master=1 does not mean that the specified host always becomes new master when the current master crashes, but is helpful to set priority.
 
 If you set candidate_master=1 on multiple servers, priority is decided by sort order by block name (`[server_xxx]`). `[server_1]` will have higher priority than `[server_2]`.
-
 
 ### no_master
 
@@ -109,10 +103,8 @@ By default, MHA Manager does not start failover if any of the slave server fails
 Skipping SSH connectivity at initial startup.
 
 ### skip_reset_slave
-
-(Supported from 0.56)
+> (Supported from 0.56)
 Skipping executing RESET SLAVE (ALL) after master failover.
-
 
 ### user
 
@@ -128,14 +120,14 @@ MySQL replication username used at CHANGE MASTER TO master_user .. on each slave
 
 ### repl_password
 
-> MySQL password of the "repl_user" user. By default, it's the current replication password. This means current master's password. If you run [online master switch](http://code.google.com/p/mysql-master-ha/wiki/masterha_master_switch#Scheduled%28Online%29_Master_Switch) with setting --orig_master_is_new_slave (which means current master runs as a new slave of the new master), starting a slave will fail without setting repl_password because on the current master default replication password is empty (MHA will execute change master without setting replication password on the orig master, though setting current replication password on other slaves).
+MySQL password of the "repl_user" user. By default, it's the current replication password. This means current master's password. If you run [online master switch](http://code.google.com/p/mysql-master-ha/wiki/masterha_master_switch#Scheduled%28Online%29_Master_Switch) with setting --orig_master_is_new_slave (which means current master runs as a new slave of the new master), starting a slave will fail without setting repl_password because on the current master default replication password is empty (MHA will execute change master without setting replication password on the orig master, though setting current replication password on other slaves).
 
 ### disable_log_bin
 
 When this option is set, when applying differential relay logs to slaves, slaves do not generate binary logs. Internally MHA passes --disable-log-bin to mysqlbinlog command.
 
 ### master_pid_file
-Setting master's pid file. This might be useful when you are running multiple MySQL instances within single server. See [shutdown_script](#shutdown-script) parameter for details.
+Setting master's pid file. This might be useful when you are running multiple MySQL instances within single server. See [shutdown_script](#shutdown_script) parameter for details.
 
 ### ssh_user
 
@@ -179,7 +171,7 @@ Full path file name that MHA Manager generates logs. If not set, MHA Manager pri
 
 ### check_repl_delay
 
-> By default, if a slave behinds master more than 100MB of relay logs (= needs to apply more than 100MB of relay logs), MHA does not choice the slave as a new master because it takes too long time to recover. By setting check_repl_delay=0, MHA ignores replication delay when selecting a new master. This option is useful when you set candidate_master=1 on a specific host and you want to make sure that the host can be new master.
+By default, if a slave behinds master more than 100MB of relay logs (= needs to apply more than 100MB of relay logs), MHA does not choice the slave as a new master because it takes too long time to recover. By setting check_repl_delay=0, MHA ignores replication delay when selecting a new master. This option is useful when you set candidate_master=1 on a specific host and you want to make sure that the host can be new master.
 
 ### check_repl_filter
 
@@ -190,12 +182,10 @@ By default, if any of the master and slaves has different binary log / replicati
 By default, the latest slave (a slave receives the latest binlog events) is prioritized as a new master. If you want to fully control the order of priority (i.e. host2->host3->host4..), setting latest_priority=0 will help. See [FAQ](FAQ#which-host-is-selected-as-a-new-master) for details.
 
 ### multi_tier_slave
-
+> (Supported from 0.52)
 Starting from MHA Manager version 0.52, multi-master replication configurations are supported.
 By default, it is not allowed to set three or more tier replication hosts in a MHA configuration file. For example, suppose that host2 replicates from host1 and host3 replicates from host2. By default, it is not allowed to write host1,2,3 in a configuration file because it's three tier replication, and MHA Manager stops with errors.
 By setting multi_tier_slave, MHA Manager does not abort with three tier replication, but simply ignores third tier hosts. If host1 (master) crashes, host2 will be selected as a master, and host3 will continue replication from host2.
-
-This parameter is supported from MHA Manager version 0.52.
 
 ### ping_interval
 
@@ -204,8 +194,7 @@ This parameter states how often MHA Manager pings(executes ping SQL statement) t
 If MHA Manager fails to connect by too many connections or authentication errors, it doesn't count that the master is dead.
 
 ### ping_type
-
-(Supported from 0.53)
+> (Supported from 0.53)
 By default, MHA establishes a persistent connection to a master and checks master's availability by executing "SELECT 1" (ping_type=SELECT).
 But in some cases, it is better to check by connecting/disconnecting every time, because it's more strict and it can detect TCP connection level failure more quickly. Setting ping_type=CONNECT makes it possible.
 Starting from 0.56, ping_type=INSERT was added.
@@ -280,7 +269,6 @@ MHA Manager checks exit code (return code) of the script. If the script exits wi
 If the script exits with return code other than 0 or 10, MHA Manager aborts and it won't continue failover.
 Default parameter is empty, so MHA Manager does not invoke anything by default.
 
-
 ### master_ip_online_change_script
 
 This is similar to master_ip_failover_script parameter, but this is not used by master failover command, but by master online change command (masterha_master_switch --master_state=alive).
@@ -318,7 +306,7 @@ A sample script is located under (MHA Manager package)/samples/scripts/master_ip
 
 ### shutdown_script
 
-> You may want to force shutdown the master server so that it never restarts services (node fencing). This is important to avoid split brain. Here is an example.
+You may want to force shutdown the master server so that it never restarts services (node fencing). This is important to avoid split brain. Here is an example.
 
     shutdown_script= /usr/local/sample/bin/power_manager
 
