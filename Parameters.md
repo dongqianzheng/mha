@@ -126,7 +126,7 @@ MySQL replication username used at CHANGE MASTER TO master_user .. on each slave
 
 ### repl_password
 
-MySQL password of the "repl_user" user. By default, it's the current replication password. This means current master's password. If you run [online master switch](http://code.google.com/p/mysql-master-ha/wiki/masterha_master_switch#Scheduled%28Online%29_Master_Switch) with setting --orig_master_is_new_slave (which means current master runs as a new slave of the new master), starting a slave will fail without setting repl_password because on the current master default replication password is empty (MHA will execute change master without setting replication password on the orig master, though setting current replication password on other slaves).
+MySQL password of the "repl_user" user. By default, it's the current replication password. This means current master's password. If you run [online master switch](masterha_master_switch#scheduled-Online_Master_Switch) with setting --orig_master_is_new_slave (which means current master runs as a new slave of the new master), starting a slave will fail without setting repl_password because on the current master default replication password is empty (MHA will execute change master without setting replication password on the orig master, though setting current replication password on other slaves).
 
 ### disable_log_bin
 
