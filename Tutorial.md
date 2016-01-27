@@ -145,17 +145,17 @@ Now we have covered basic tests for master failover. In practice, you may want t
 
   You may want to test failure scenario. See the below example.
 
-    terminal1# masterha_manager --conf=/etc/app1.cnf
-    terminal2# mysql -hhost2 db1 -e "insert into t1 values (100, 100, 100)"
-    terminal2# mysql -hhost1 db1 -e "insert into t1 values (100, 100, 100)"
-    Check replication stops with error
-    kill master
-    Check master failover does not work.
-    mysql_host2> set global slave_sql_skip_counter=1;
-    mysql_host2> start slave;
-    Check replication starts again.
-    
-    Test manual failover
-    # remove error file
-    # rm -f /var/log/masterha/mha_test50/mha_test50.failover.error
-    # masterha_master_switch  --master_state=dead --conf=/path/to/conf --dead_master_host=host1
+      terminal1# masterha_manager --conf=/etc/app1.cnf
+      terminal2# mysql -hhost2 db1 -e "insert into t1 values (100, 100, 100)"
+      terminal2# mysql -hhost1 db1 -e "insert into t1 values (100, 100, 100)"
+      Check replication stops with error
+      kill master
+      Check master failover does not work.
+      mysql_host2> set global slave_sql_skip_counter=1;
+      mysql_host2> start slave;
+      Check replication starts again.
+      
+      Test manual failover
+      # remove error file
+      # rm -f /var/log/masterha/mha_test50/mha_test50.failover.error
+      # masterha_master_switch  --master_state=dead --conf=/path/to/conf --dead_master_host=host1
