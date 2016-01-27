@@ -1,12 +1,12 @@
+* [Advantages of MHA](#advantages-of-mha)
+  * [Master failover and slave promotion can be done very quickly](#master-failover-and-slave-promotion-can-be-done-very-quickly)
+  * [Master crash does not result in data inconsistency](#master-crash-does-not-result-in-data-inconsistency)
+  * [No need to modify current MySQL settings](#no-need-to-modify-current-mysql-settings)
+  * [No need to increase lots of servers](#no-need-to-increase-lots-of-servers)
+  * [No performance penalty](#no-performance-penalty)
+  * [Works with any storage engine](#works-with-any-storage-engine)
+
 # Advantages of MHA
-
-* [Master failover and slave promotion can be done very quickly](#master-failover-and-slave-promotion-can-be-done-very-quickly)
-* [Master crash does not result in data inconsistency](#master-crash-does-not-result-in-data-inconsistency)
-* [No need to modify current MySQL settings](#no-need-to-modify-current-mysql-settings)
-* [No need to increase lots of servers](#no-need-to-increase-lots-of-servers)
-* [No performance penalty](#no-performance-penalty)
-* [Works with any storage engine](#works-with-any-storage-engine)
-
 ## Master failover and slave promotion can be done very quickly
 MHA normally can do failover in seconds (9-12 seconds to detect master failure, optionally 7-10 seconds to power off the master machine to avoid split brain, a few seconds for applying differential relay logs to the new master, so total downtime is normally 10-30 seconds), as long as slaves does not delay replication seriously. After revoring the new master, MHA recovers the rest slaves in parallel. Even though you have tens of slaves, it does not affect master recovery time, and you can recover slaves very quickly.
 
