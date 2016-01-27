@@ -10,12 +10,12 @@ Set nohup, and make sure that masterha_manager does not read/write from/to STDIN
 Currently MHA Manager process does not run as a daemon. If failover completed successfully or the master process was killed by accident, the manager stops working.
 To run as a daemon, daemontool. or any external daemon program can be used. Here is an example to run from daemontools.
 
-1. Install daemontools
+1 - Install daemontools
 
-    * For RedHat
+    For RedHat
     manager_host# yum install daemontools
 
-2. Create run file under /service/masterha_(app\_name)/run_
+2 - Create run file under /service/masterha_(app\_name)/run_
 
     manager_host# mkdir /service/masterha_app1
     manager_host# cat /service/masterha_app1/run
