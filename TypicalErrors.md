@@ -61,4 +61,4 @@ In this case, ssh\_user was app, but app user on host1 does not have read privil
     Sat Jul 2 13:23:14 2011 - [info] Got exit code 1 (Not master dead).
     Died at /usr/bin/masterha_manager line 59.
 
-The most likely cause of this error is that you are using multi-master replication. Currently MHA does not support multi-master replication. See [Requirements#single_master_and_multiple_slaves](Requirements#single_master_and_multiple_slaves) for details.
+The most likely cause of this error is that you are using multi-master replication. Currently MHA does not support multi-master replication. See [Single_master_and_multiple_slaves](Requirements#single_master_and_multiple_slaves) for details.
