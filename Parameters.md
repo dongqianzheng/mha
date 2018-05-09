@@ -34,7 +34,7 @@
 |[latest_priority](#latest_priority)|No             |App/Global           |1                  |latest_priority=0|
 |[multi_tier_slave](#multi_tier_slave)|No             |App/Global           |0                  |multi_tier_slave=1|
 |[ping_interval](#ping_interval)|No             |App/Global           |3                  |ping_interval=5|
-|[ping_type](#ping-type)|No             |App/Global           |SELECT             |ping_type=CONNECT|
+|[ping_type](#ping_type)|No             |App/Global           |SELECT             |ping_type=CONNECT|
 |[secondary_check_script](#secondary_check_script)|No             |App/Global           |null               |secondary_check_script= masterha_secondary_check -s remote_dc1 -s remote_dc2|
 |[master_ip_failover_script](#master_ip_failover_script)|No             |App/Global           |null               |master_ip_failover_script=/usr/local/custom_script/master_ip_failover|
 |[master_ip_online_change_script](#master_ip_online_change_script)|No             |App/Global           |null               |master_ip_online_change_script= /usr/local/custom_script/master_ip_online_change|
